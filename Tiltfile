@@ -1,4 +1,4 @@
-SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='index.docker.io/ssisil/supply-chain/tanzu-java-web-app-source')
+SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='index.docker.io/ssisil/tanzu-java-web-app-source')
 LOCAL_PATH = os.getenv("LOCAL_PATH", default='.')
 NAMESPACE = os.getenv("NAMESPACE", default='default')
 
@@ -12,7 +12,7 @@ k8s_custom_deploy(
               "&& kubectl get workload tanzu-java-web-app --namespace " + NAMESPACE + " -o yaml",
     delete_cmd="tanzu apps workload delete -f config/workload.yaml --namespace " + NAMESPACE + " --yes",
     deps=['pom.xml', './target/classes'],
-    image_selector='index.docker.io/ssisil/supply-chain/tanzu-java-web-app-' + NAMESPACE,
+    image_selector='index.docker.io/ssisil/tanzu-java-web-app-' + NAMESPACE,
     live_update=[
       sync('./target/classes', '/workspace/BOOT-INF/classes')
     ]
@@ -20,3 +20,4 @@ k8s_custom_deploy(
 
 k8s_resource('tanzu-java-web-app', port_forwards=["8080:8080"],
             extra_pod_selectors=[{'serving.knative.dev/service': 'tanzu-java-web-app'}])
+allow_k8s_contexts('gke_ssisil-daisy_us-west1-a_gke-tap-install')
