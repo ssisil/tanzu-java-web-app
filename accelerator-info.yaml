@@ -1,0 +1,21 @@
+id: 4579e8d8-1cbc-49ca-84cc-66bed13d7b8c
+timestamp: 2023-10-19T17:16:57.813Z
+source: INTELLIJ
+username: ssisil
+accelerator:
+  name: tanzu-java-web-app
+fragments:
+  - name: build-wrapper-gradle
+  - name: build-wrapper-maven
+  - name: devcontainer
+  - name: java-version
+  - name: tap-workload
+options:
+  nativeBuild: false
+  includeBuildToolWrapper: true
+  javaVersion: 11
+  buildTool: maven
+  springBootVersion: 2.7
+  ide: intellij
+  includeDevContainer: false
+  projectName: tanzu-java-web-app
